@@ -6,10 +6,12 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -39,6 +41,19 @@ public class Categories {
 
 	@Column(name = "categorieUpdateDate")
 	private Date categorieUpdateDate;
+	
+	@ManyToMany(mappedBy="categorie", cascade = CascadeType.ALL, fetch=FetchType.LAZY)
+	private Collection<Brand> brand;
+	
+	
+	
+	public Collection<Brand> getBrand() {
+		return brand;
+	}
+
+	public void setBrand(Collection<Brand> brand) {
+		this.brand = brand;
+	}
 
 	public Long getCategorieId() {
 		return categorieId;
