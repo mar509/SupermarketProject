@@ -3,6 +3,10 @@ package com.supermarket.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.supermarket.entities.Brand;
@@ -14,8 +18,8 @@ public class BrandRestService {
 	@Autowired
 	private BrandMetierInter brandMetier;
 
-	
-	public Brand findOneBrand(Long idBrand) {
+	@RequestMapping(value="/brands/{idBrand}",method=RequestMethod.GET)
+	public Brand findOneBrand(@PathVariable Long idBrand) {
 		return brandMetier.findOneBrand(idBrand);
 	}
 
@@ -23,15 +27,17 @@ public class BrandRestService {
 		return brandMetier.findall();
 	}
 
-	public Brand addBrand(Brand brand) {
+	@RequestMapping(value="/brands",method=RequestMethod.POST)
+	public Brand addBrand(@RequestBody Brand brand) {
 		return brandMetier.addBrand(brand);
 	}
 
-	public Brand updateBrand(Brand brand) {
+	@RequestMapping(value="/brands",method=RequestMethod.PUT)
+	public Brand updateBrand(@RequestBody Brand brand) {
 		return brandMetier.updateBrand(brand);
 	}
-
-	public void deleteBrand(Long idBrand) {
+	@RequestMapping(value="/brands/{idBrand}",method=RequestMethod.PUT)
+	public void deleteBrand(@PathVariable Long idBrand) {
 		brandMetier.deleteBrand(idBrand);
 	}
 
